@@ -24,7 +24,6 @@ with col1:
     try:
         tl = pd.read_excel(tl_data, skiprows=[0])
         c_data = datacleaner(tl)
-        st.write(c_data)
 
         buffer = io.BytesIO()
         with pd.ExcelWriter(buffer, engine='xlsxwriter') as writer:
