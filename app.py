@@ -25,11 +25,11 @@ with col1:
         buffer = io.BytesIO()
         with pd.ExcelWriter(buffer, engine='xlsxwriter') as writer:
             c_data.to_excel(writer, sheet_name='Sheet1', index=False)
-            download2 = st.download_button(
-                label="Download data as Excel",
-                data=buffer.getvalue(),
-                file_name='file-excel.xlsx',
-                mime='application/vnd.ms-excel')
+        download = st.download_button(
+            label="Download data as Excel",
+            data=buffer.getvalue(),
+            file_name='file-excel.xlsx',
+            mime='application/vnd.ms-excel')
             
     except ValueError:
         st.error("Please upload the timeline file")
