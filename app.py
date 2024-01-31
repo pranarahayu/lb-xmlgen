@@ -28,7 +28,7 @@ with col1:
             c_data.to_excel(writer, sheet_name='Sheet1', index=False)
             download2 = st.download_button(
                 label="Download data as Excel",
-                data=buffer,
+                data=buffer.getvalue(),
                 file_name='file-excel.xlsx',
                 mime='application/vnd.ms-excel')
             
