@@ -28,6 +28,8 @@ try:
         c_data.to_excel(writer, sheet_name='Sheet1', index=False)
     cl_data = buffer.getvalue()
 
+    st.write(cl_data)
+
     wb = load_workbook(cl_data)
     ws = wb.worksheets[0]
     doc, tag, text = Doc().tagtext()
