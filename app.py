@@ -21,7 +21,7 @@ with col1:
     except ValueError:
         st.error("Please upload the timeline file")
 
-    c_data = datacleaner(tl_data)
+    c_data = datacleaner(tl)
     st.write(c_data)
 
 '''
