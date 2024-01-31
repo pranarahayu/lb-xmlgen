@@ -76,5 +76,5 @@ try:
             file_name='xml-data.xml',
             mime='text/csv')
     
-    except ValueError:
-        st.error("Please upload the timeline file")
+except ValueError:
+    st.error("Please upload the timeline file")
