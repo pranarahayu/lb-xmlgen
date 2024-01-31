@@ -11,8 +11,6 @@ st.markdown('Created by: Prana - R&D Division Lapangbola.com')
 sys.path.append("listfungsi.py")
 from listfungsi import datacleaner
 
-buffer = io.BytesIO()
-
 with st.expander("BACA INI DULU."):
     st.write("Upload file timeline yang telah selesai di-QC!")
     
@@ -24,6 +22,7 @@ with col1:
         c_data = datacleaner(tl)
         st.write(c_data)
 
+        buffer = io.BytesIO()
         with pd.ExcelWriter(buffer, engine='xlsxwriter') as writer:
             c_data.to_excel(writer, sheet_name='Sheet1', index=False)
             download2 = st.download_button(
