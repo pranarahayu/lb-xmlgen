@@ -15,8 +15,8 @@ st.markdown('Created by: Prana - R&D Division Lapangbola.com')
 sys.path.append("listfungsi.py")
 from listfungsi import datacleaner
 
-with st.expander("BACA INI DULU."):
-    st.write("Upload file timeline yang telah selesai di-QC!")
+with st.expander("CARA PAKAI."):
+    st.write("1. Upload file timeline ke file uploader pertama./n2. Download as excel, upload excel ke file uploader kedua./n3. Download file XML")
     
 col1, col2 = st.columns(2)
 with col1:
