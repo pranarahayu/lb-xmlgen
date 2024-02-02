@@ -22,9 +22,9 @@ tl_data = st.file_uploader("Upload file timeline excel!")
 try:
     tl = pd.read_excel(tl_data, skiprows=[0])
     c_data = datacleaner(tl)
-    c_data.to_excel('/app/lb-xml/data/excel-data.xlsx', index=False)
+    c_data.to_excel('/app/lb-xmlgen/data/excel-data.xlsx', index=False)
     
-    wb = load_workbook('/app/lb-xml/data/excel-data.xlsx')
+    wb = load_workbook('/app/lb-xmlgen/data/excel-data.xlsx')
     ws = wb.worksheets[0]
     doc, tag, text = Doc().tagtext()
 
