@@ -18,8 +18,8 @@ def datacleaner(data):
   test['Mins'] = test['Mins_1']+test['Mins_2']
   test['Secs'] = test['Min'].str.split(':').str[1]
   test['Secs'] = test['Secs'].astype(int)
-  test['start'] = (((test['Mins']*60)+test['Secs'])-5)-60
-  test['end'] = (((test['Mins']*60)+test['Secs'])+5)-60
+  test['start'] = (((test['Mins']*60)+test['Secs'])-5)-55
+  test['end'] = (((test['Mins']*60)+test['Secs'])+5)-55
   test = test[['index', 'start', 'end', 'Act Name', 'Team', 'Action']]
 
   test['code'] = test['Action']
