@@ -18,8 +18,8 @@ def datacleaner(data):
   test['Mins'] = test['Mins_1']+test['Mins_2']
   test['Secs'] = test['Min'].str.split(':').str[1]
   test['Secs'] = test['Secs'].astype(int)
-  test['start'] = (((test['Mins']*60)+test['Secs'])-5)-55
-  test['end'] = (((test['Mins']*60)+test['Secs'])+5)-55
+  test['start'] = ((test['Mins']*60)+test['Secs'])-5
+  test['end'] = ((test['Mins']*60)+test['Secs'])+5
   test = test[['index', 'start', 'end', 'Act Name', 'Team', 'Action']]
 
   test['code'] = test['Action']
@@ -43,12 +43,22 @@ def datacleaner(data):
   test2['label.group'] = 'Team'
   test2 = test2[['index', 'label.text', 'label.group']]
 
-  testdata = pd.merge(test, test1, on='index', how='left')
+  test3 = data.copy()
+  test3 = test3[['Sub 1', 'Sub 2', 'Sub 3', 'Sub 4']].reset_index()
+  test3 = test3.fillna('None')
+  test3['label.text'] = test3['Sub 1'] + ' - ' + test3['Sub 2'] + ' - ' + test3['Sub 3'] + ' - ' + test3['Sub 4']
+  test3['label.group'] = 'Comment'
+  test3 = test3[['index', 'label.text', 'label.group']]
+
+  testdata = pd.merge(test, test1, on='index', how='left', suffixes=('_1', '_2'))
   testdata = pd.merge(testdata, test2, on='index', how='left')
+  testdata = pd.merge(testdata, test3, on='index', how='left')
+
+  testdata = testdata[(testdata['label.text_1'] != 'Subs') & (testdata['label.text_1'] != 'Concede Goal') & (testdata['label.text_1'] != 'Cleansheet') & (testdata['label.text_1'] != 'Winning Goal') & (testdata['label.text_1'] != 'Create Chance')].reset_index(drop=True)
 
   testdata = testdata.drop(['index'], axis=1).sort_values(['start', 'end']).reset_index(drop=True).reset_index()
   testdata.rename(columns = {'index':'ID'}, inplace = True)
 
-  testdata = testdata[['ID', 'code', 'start', 'end', 'label.group_x', 'label.text_x', 'label.group_y', 'label.text_y', 'label.group', 'label.text']]
+  testdata = testdata[['ID', 'code', 'start', 'end', 'label.group_1', 'label.text_1', 'label.group_2', 'label.text_2', 'label.group_x', 'label.text_x', 'label.group_y', 'label.text_y']]
 
   return testdata
