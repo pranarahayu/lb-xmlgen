@@ -79,6 +79,11 @@ with col2:
                         text(row[8])
                       with tag('text'):
                         text(row[9])
+                    with tag('label'):
+                      with tag('group'):
+                        text(row[10])
+                      with tag('text'):
+                        text(row[11])
 
         result = indent(doc.getvalue(), indentation = '    ',indent_text = True)
         with open("xml-data.xml", "w") as f:
