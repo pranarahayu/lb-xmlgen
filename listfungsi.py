@@ -18,9 +18,22 @@ def datacleaner(data):
   test['Mins'] = test['Mins_1']+test['Mins_2']
   test['Secs'] = test['Min'].str.split(':').str[1]
   test['Secs'] = test['Secs'].astype(int)
-  test['start'] = ((test['Mins']*60)+test['Secs'])-5
-  test['end'] = ((test['Mins']*60)+test['Secs'])+5
+  for i in range(len(test)):
+    if (test['Action'][i] == 'goal') or (test['Action'][i] == 'own goal') or (test['Action'][i] == 'assist') or (test['Action'][i] == 'penalty goal') or (test['Action'][i] == 'penalty save') or (test['Action'][i] == 'conceding penalty') or (test['Action'][i] == 'penalty missed'):
+      test['start'] = ((test['Mins']*60)+test['Secs'])-10
+      test['end'] = ((test['Mins']*60)+test['Secs'])
+    elif (test['Action'][i] == 'save') or (test['Action'][i] == 'yellow card') or (test['Action'][i] == 'red card') or (test['Action'][i] == 'miss big chance') or (test['Action'][i] == 'shoot blocked') or (test['Action'][i] == 'shoot on target') or (test['Action'][i] == 'shoot off target') or (test['Action'][i] == 'block'):
+      test['start'] = ((test['Mins']*60)+test['Secs'])-7
+      test['end'] = ((test['Mins']*60)+test['Secs'])+3
+    elif (test['Action'][i] == 'free kick') or (test['Action'][i] == 'corner') or (test['Action'][i] == 'throw in') or (test['Action'][i] == 'goal kick'):
+      test['start'] = ((test['Mins']*60)+test['Secs'])-3
+      test['end'] = ((test['Mins']*60)+test['Secs'])+7
+    else:
+      test['start'] = ((test['Mins']*60)+test['Secs'])-5
+      test['end'] = ((test['Mins']*60)+test['Secs'])+5
   test = test[['index', 'start', 'end', 'Act Name', 'Team', 'Action']]
+  test['start'] = test['start']-55
+  test['end'] = test['end']-55
 
   test['code'] = test['Action']
   test['label.text'] = test['code']
