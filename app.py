@@ -13,7 +13,8 @@ st.header('XML File Generator')
 st.markdown('Created by: Prana - R&D Division Lapangbola.com')
 
 sys.path.append("listfungsi.py")
-from listfungsi import datacleaner
+from listfungsi import res_data
+from listfungsi import cleandata
 
 with st.expander("CARA PAKAI."):
     st.write("1. Upload file timeline ke file uploader pertama; 2. Download as excel, upload excel ke file uploader kedua; 3. Download file XML")
@@ -23,16 +24,27 @@ with col1:
     tl_data = st.file_uploader("Upload file timeline excel!")
     try:
         tl = pd.read_excel(tl_data, skiprows=[0])
-        c_data = datacleaner(tl)
+        c_data_1 = cleandata(tl)[0]
+        c_data_2 = cleandata(tl)[1]
 
         buffer = io.BytesIO()
         with pd.ExcelWriter(buffer, engine='xlsxwriter') as writer:
-            c_data.to_excel(writer, sheet_name='Sheet1', index=False)
-        download = st.download_button(
-            label="Download data as Excel",
+            c_data_1.to_excel(writer, sheet_name='Sheet1', index=False)
+        download_1 = st.download_button(
+            label="Download 1st half data as Excel",
             data=buffer.getvalue(),
-            file_name='clean-data.xlsx',
-            mime='application/vnd.ms-excel')
+            file_name='clean-data-1st.xlsx',
+            mime='application/vnd.ms-excel',
+            key = 0)
+        
+        with pd.ExcelWriter(buffer, engine='xlsxwriter') as writer:
+            c_data_2.to_excel(writer, sheet_name='Sheet1', index=False)
+        download_2 = st.download_button(
+            label="Download 2nd half data as Excel",
+            data=buffer.getvalue(),
+            file_name='clean-data-2nd.xlsx',
+            mime='application/vnd.ms-excel',
+            key = 1)
             
     except ValueError:
         st.error("Please upload the timeline file")
