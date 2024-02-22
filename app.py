@@ -23,7 +23,7 @@ with col1:
     tl_data = st.file_uploader("Upload file timeline excel!")
     try:
         tl = pd.read_excel(tl_data, skiprows=[0])
-        c_data = datacleaner(tl)[0]
+        c_data = datacleaner(tl)
 
         buffer = io.BytesIO()
         with pd.ExcelWriter(buffer, engine='xlsxwriter') as writer:
