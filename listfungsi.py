@@ -31,7 +31,7 @@ def res_data(data):
   test = test[['index', 'start', 'end', 'code', 'label.text', 'label.group']]
   test['label.text'] = test['label.text'].str.title()
 
-  test1 = datax.copy()
+  test1 = data.copy()
   test1 = test1[[ 'Num', 'Act Name', 'Team']].reset_index()
   test1['label.text'] = ''
   for i in range(len(test1)):
@@ -39,13 +39,13 @@ def res_data(data):
   test1['label.group'] = 'Player'
   test1 = test1[['index', 'label.text', 'label.group']]
 
-  test2 = datax.copy()
+  test2 = data.copy()
   test2 = test2[[ 'Num', 'Act Name', 'Team']].reset_index()
   test2['label.text'] = test2['Team']
   test2['label.group'] = 'Team'
   test2 = test2[['index', 'label.text', 'label.group']]
 
-  test3 = datax.copy()
+  test3 = data.copy()
   test3 = test3[['Sub 1', 'Sub 2', 'Sub 3', 'Sub 4']].reset_index()
   test3 = test3.fillna('None')
   test3['label.text'] = test3['Sub 1'] + ' - ' + test3['Sub 2'] + ' - ' + test3['Sub 3'] + ' - ' + test3['Sub 4']
