@@ -36,7 +36,8 @@ with col1:
             file_name='clean-data-1st.xlsx',
             mime='application/vnd.ms-excel',
             key = 0)
-        
+
+        buffer = io.BytesIO()
         with pd.ExcelWriter(buffer, engine='xlsxwriter') as writer:
             c_data_2.to_excel(writer, sheet_name='Sheet1', index=False)
         download_2 = st.download_button(
