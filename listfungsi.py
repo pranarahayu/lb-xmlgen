@@ -4,7 +4,7 @@ import glob
 from datetime import date
 import numpy as np
 
-def res_data(data):
+def res_data(data, datax):
   test = data.copy()
   for i in range(len(test)):
     if (test['Action'][i] == 'goal') or (test['Action'][i] == 'own goal') or (test['Action'][i] == 'assist') or (test['Action'][i] == 'penalty goal') or (test['Action'][i] == 'penalty save') or (test['Action'][i] == 'conceding penalty') or (test['Action'][i] == 'penalty missed'):
@@ -31,7 +31,7 @@ def res_data(data):
   test = test[['index', 'start', 'end', 'code', 'label.text', 'label.group']]
   test['label.text'] = test['label.text'].str.title()
 
-  test1 = tl.copy()
+  test1 = datax.copy()
   test1 = test1[[ 'Num', 'Act Name', 'Team']].reset_index()
   test1['label.text'] = ''
   for i in range(len(test1)):
@@ -39,13 +39,13 @@ def res_data(data):
   test1['label.group'] = 'Player'
   test1 = test1[['index', 'label.text', 'label.group']]
 
-  test2 = tl.copy()
+  test2 = datax.copy()
   test2 = test2[[ 'Num', 'Act Name', 'Team']].reset_index()
   test2['label.text'] = test2['Team']
   test2['label.group'] = 'Team'
   test2 = test2[['index', 'label.text', 'label.group']]
 
-  test3 = tl.copy()
+  test3 = datax.copy()
   test3 = test3[['Sub 1', 'Sub 2', 'Sub 3', 'Sub 4']].reset_index()
   test3 = test3.fillna('None')
   test3['label.text'] = test3['Sub 1'] + ' - ' + test3['Sub 2'] + ' - ' + test3['Sub 3'] + ' - ' + test3['Sub 4']
@@ -67,8 +67,8 @@ def res_data(data):
 
   return test
 
-def cleandata(data):
-  data = data.copy()
+def cleandata(datax):
+  data = datax.copy()
   data = data[['Min', 'Num', 'Act Name', 'Team', 'Action']].reset_index()
   data['Mins'] = data['Min'].str.split(':').str[0]
   data['Mins_1'] = data['Mins'].str.split('+').str[0]
@@ -83,8 +83,8 @@ def cleandata(data):
   satu = data[data['Mins_1']<46].reset_index(drop=True)
   dua = data[data['Mins_1']>45].reset_index(drop=True)
   dua['Mins_1'] = dua['Mins_1']-45
-  satu = res_data(satu)
-  dua = res_data(dua)
+  satu = res_data(satu, datax)
+  dua = res_data(dua, datax)
   dua['ID'] = dua['ID']+len(satu)
 
   return satu, dua
