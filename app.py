@@ -29,7 +29,7 @@ with col1:
         with pd.ExcelWriter(buffer, engine='xlsxwriter') as writer:
             c_data.to_excel(writer, sheet_name='Sheet1', index=False)
         download_1 = st.download_button(
-            label="Download 1st half data as Excel",
+            label="Download data as Excel",
             data=buffer.getvalue(),
             file_name='clean-data.xlsx',
             mime='application/vnd.ms-excel',
