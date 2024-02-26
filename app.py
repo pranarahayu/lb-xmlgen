@@ -13,7 +13,8 @@ st.header('XML File Generator')
 st.markdown('Created by: Prana - R&D Division Lapangbola.com')
 
 sys.path.append("listfungsi.py")
-from listfungsi import datacleaner
+from listfungsi import res_data
+from listfungsi import cleandata
 
 with st.expander("CARA PAKAI."):
     st.write("1. Upload file timeline ke file uploader pertama; 2. Download as excel, upload excel ke file uploader kedua; 3. Download file XML")
