@@ -51,7 +51,8 @@ with col1:
 
 with col2:
     cl_data = st.file_uploader("Upload file clean-data.xlsx!")
-    max = len(cl_data)
+    temp = pd.read_excel(cl_data)
+    max = len(temp)
     try:
         wb = load_workbook(cl_data)
         ws = wb.worksheets[0]
