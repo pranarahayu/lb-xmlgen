@@ -44,7 +44,7 @@ with col1:
             data=buffer.getvalue(),
             file_name='clean-data_2nd-half.xlsx',
             mime='application/vnd.ms-excel',
-            key = 0)
+            key = 1)
             
     except ValueError:
         st.error("Please upload the timeline file")
