@@ -32,8 +32,8 @@ with col1:
         xt2 = converter(t2)
     try:
         tl = pd.read_excel(tl_data, skiprows=[0])
-        c1_data = cleandata(tl)[0]
-        c2_data = cleandata(tl)[1]
+        c1_data = cleandata(tl, xt1)[0]
+        c2_data = cleandata(tl, xt2)[1]
         buffer = io.BytesIO()
         with pd.ExcelWriter(buffer, engine='xlsxwriter') as writer:
             c1_data.to_excel(writer, sheet_name='Sheet1', index=False)
