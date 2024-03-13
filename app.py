@@ -22,6 +22,11 @@ with st.expander("CARA PAKAI."):
 col1, col2 = st.columns(2)
 with col1:
     tl_data = st.file_uploader("Upload file timeline excel!")
+    kol1, kol2 = st.columns(2)
+    with kol1:
+        t1 = st.text_input('Video babak 1 dimulai dari?')
+    with kol2:
+        t2 = st.text_input('Video babak 2 dimulai dari?')
     try:
         tl = pd.read_excel(tl_data, skiprows=[0])
         c1_data = cleandata(tl)[0]
