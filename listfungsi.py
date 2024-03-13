@@ -10,11 +10,11 @@ def converter(text):
   mm = int(test.split(",")[1])
   ss = int(test.split(",")[2])
 
-  cvt = (hh*60)+mm+(ss*(1/60))
+  cvt = (hh*3600)+(mm*60)+(ss)
 
   return cvt
 
-def res_data(data, datax, tm):
+def res_data(data, datax):
   test = data.copy()
   for i in range(len(test)):
     if (test['Action'][i] == 'goal') or (test['Action'][i] == 'own goal') or (test['Action'][i] == 'assist') or (test['Action'][i] == 'penalty goal') or (test['Action'][i] == 'penalty save') or (test['Action'][i] == 'conceding penalty') or (test['Action'][i] == 'penalty missed'):
@@ -31,8 +31,6 @@ def res_data(data, datax, tm):
       test['end'] = ((test['Mins']*60)+test['Secs'])+5
 
   test = test[['index', 'start', 'end', 'Act Name', 'Team', 'Action']]
-  test['start'] = test['start']-tm
-  test['end'] = test['end']-tm
 
   test['code'] = test['Action']
   test['label.text'] = test['code']
@@ -77,7 +75,7 @@ def res_data(data, datax, tm):
 
   return test
 
-def cleandata(datax):
+def cleandata(datax, tm):
   data = datax.copy()
   data = data[(data['Action']=='goal') | (data['Action']=='penalty goal') | (data['Action']=='penalty missed') | (data['Action']=='own goal') | (data['Action']=='shoot on target') | (data['Action']=='shoot off target') | (data['Action']=='shoot blocked') | (data['Action']=='key pass') | (data['Action']=='assist')].reset_index(drop=True)
   data = data[['Min', 'Num', 'Act Name', 'Team', 'Action']].reset_index()
@@ -95,7 +93,11 @@ def cleandata(datax):
   dua = data[data['Mins_1']>45].reset_index(drop=True)
   dua['Mins_1'] = dua['Mins_1']-45
   satu = res_data(satu, datax)
+  satu['start'] = satu['start']+tm
+  satu['end'] = satu['end']+tm
   dua = res_data(dua, datax)
+  dua['start'] = dua['start']+tm
+  dua['end'] = dua['end']+tm
   dua['ID'] = dua['ID']+len(satu)
 
   return satu, dua
