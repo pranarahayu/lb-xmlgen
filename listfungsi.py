@@ -4,6 +4,16 @@ import glob
 from datetime import date
 import numpy as np
 
+def converter(text):
+  test = text
+  hh = int(test.split(",")[0])
+  mm = int(test.split(",")[1])
+  ss = int(test.split(",")[2])
+
+  cvt = (hh*60)+mm+(ss*(1/60))
+
+  return cvt
+
 def res_data(data, datax):
   test = data.copy()
   for i in range(len(test)):
