@@ -15,6 +15,7 @@ st.markdown('Created by: Prana - R&D Division Lapangbola.com')
 sys.path.append("listfungsi.py")
 from listfungsi import res_data
 from listfungsi import cleandata
+from listfungsi import converter
 
 with st.expander("CARA PAKAI."):
     st.write("1. Upload file timeline ke file uploader pertama; 2. Download as excel, upload excel ke file uploader kedua; 3. Download file XML")
@@ -25,8 +26,10 @@ with col1:
     kol1, kol2 = st.columns(2)
     with kol1:
         t1 = st.text_input('Video babak 1 dimulai dari?')
+        xt1 = converter(t1)
     with kol2:
         t2 = st.text_input('Video babak 2 dimulai dari?')
+        xt2 = converter(t2)
     try:
         tl = pd.read_excel(tl_data, skiprows=[0])
         c1_data = cleandata(tl)[0]
