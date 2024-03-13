@@ -31,8 +31,6 @@ def res_data(data, datax):
       test['end'] = ((test['Mins']*60)+test['Secs'])+5
 
   test = test[['index', 'start', 'end', 'Act Name', 'Team', 'Action']]
-  test['start'] = test['start']-55
-  test['end'] = test['end']-55
 
   test['code'] = test['Action']
   test['label.text'] = test['code']
