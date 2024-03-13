@@ -14,7 +14,7 @@ def converter(text):
 
   return cvt
 
-def res_data(data, datax):
+def res_data(data, datax, tm):
   test = data.copy()
   for i in range(len(test)):
     if (test['Action'][i] == 'goal') or (test['Action'][i] == 'own goal') or (test['Action'][i] == 'assist') or (test['Action'][i] == 'penalty goal') or (test['Action'][i] == 'penalty save') or (test['Action'][i] == 'conceding penalty') or (test['Action'][i] == 'penalty missed'):
@@ -31,8 +31,8 @@ def res_data(data, datax):
       test['end'] = ((test['Mins']*60)+test['Secs'])+5
 
   test = test[['index', 'start', 'end', 'Act Name', 'Team', 'Action']]
-  #test['start'] = test['start']-68
-  #test['end'] = test['end']-68
+  test['start'] = test['start']-tm
+  test['end'] = test['end']-tm
 
   test['code'] = test['Action']
   test['label.text'] = test['code']
