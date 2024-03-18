@@ -96,8 +96,8 @@ def cleandata(datax, tm):
   satu['start'] = satu['start']+tm
   satu['end'] = satu['end']+tm
   dua = res_data(dua, datax)
-  dua['start'] = dua['start']+tm
-  dua['end'] = dua['end']+tm
+  dua['start'] = dua['start']+tm-(45*60)
+  dua['end'] = dua['end']+tm-(45*60)
   dua['ID'] = dua['ID']+len(satu)
 
   return satu, dua
