@@ -91,7 +91,6 @@ def cleandata(datax, tm):
 
   satu = data[data['Mins_1']<46].reset_index(drop=True)
   dua = data[data['Mins_1']>45].reset_index(drop=True)
-  dua['Mins_1'] = dua['Mins_1']-45
   satu = res_data(satu, datax)
   satu['start'] = satu['start']+tm
   satu['end'] = satu['end']+tm
