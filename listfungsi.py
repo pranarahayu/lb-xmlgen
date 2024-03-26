@@ -89,6 +89,7 @@ def cleandata(datax, tm):
   data['Secs'] = data['Min'].str.split(':').str[1]
   data['Secs'] = data['Secs'].astype(int)
 
-  fixdata = resdata(data, datax)
+  tempdata = data.reset_index(drop=True)
+  fixdata = resdata(tempdata, datax)
 
   return fixdata
