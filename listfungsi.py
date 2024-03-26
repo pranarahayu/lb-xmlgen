@@ -6,9 +6,9 @@ import numpy as np
 
 def converter(text):
   test = text
-  hh = int(test.split(",")[0])
-  mm = int(test.split(",")[1])
-  ss = int(test.split(",")[2])
+  hh = int(test.split(":")[0])
+  mm = int(test.split(":")[1])
+  ss = int(test.split(":")[2])
 
   cvt = (hh*3600)+(mm*60)+(ss)
 
@@ -89,14 +89,6 @@ def cleandata(datax, tm):
   data['Secs'] = data['Min'].str.split(':').str[1]
   data['Secs'] = data['Secs'].astype(int)
 
-  satu = data[data['Mins_1']<46].reset_index(drop=True)
-  dua = data[data['Mins_1']>45].reset_index(drop=True)
-  satu = res_data(satu, datax)
-  satu['start'] = satu['start']+tm
-  satu['end'] = satu['end']+tm
-  dua = res_data(dua, datax)
-  dua['start'] = dua['start']+tm-(45*60)
-  dua['end'] = dua['end']+tm-(45*60)
-  dua['ID'] = dua['ID']+len(satu)
+  fixdata = resdata(data, datax)
 
-  return satu, dua
+  return fixdata
