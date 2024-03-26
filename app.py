@@ -24,7 +24,7 @@ col1, col2 = st.columns(2)
 with col1:
     tl_data = st.file_uploader("Upload file timeline excel!")
     t1 = st.text_input('Video dimulai dari?')
-    xt1 = converter(t1)
+    xt = converter(t1)
     try:
         tl = pd.read_excel(tl_data, skiprows=[0])
         c_data = cleandata(tl, xt)
