@@ -23,36 +23,21 @@ with st.expander("CARA PAKAI."):
 col1, col2 = st.columns(2)
 with col1:
     tl_data = st.file_uploader("Upload file timeline excel!")
-    kol1, kol2 = st.columns(2)
-    with kol1:
-        t1 = st.text_input('Video babak 1 dimulai dari?')
-        xt1 = converter(t1)
-    with kol2:
-        t2 = st.text_input('Video babak 2 dimulai dari?')
-        xt2 = converter(t2)
+    t1 = st.text_input('Video dimulai dari?')
+    xt1 = converter(t1)
     try:
         tl = pd.read_excel(tl_data, skiprows=[0])
-        c1_data = cleandata(tl, xt1)[0]
-        c2_data = cleandata(tl, xt2)[1]
+        c_data = cleandata(tl, xt)
+        
         buffer = io.BytesIO()
         with pd.ExcelWriter(buffer, engine='xlsxwriter') as writer:
-            c1_data.to_excel(writer, sheet_name='Sheet1', index=False)
-        download_1 = st.download_button(
-            label="Download 1st half data as Excel",
+            c_data.to_excel(writer, sheet_name='Sheet1', index=False)
+        download = st.download_button(
+            label="Download data as Excel",
             data=buffer.getvalue(),
-            file_name='clean-data_1st-half.xlsx',
+            file_name='clean-data.xlsx',
             mime='application/vnd.ms-excel',
             key = 0)
-
-        buffer = io.BytesIO()
-        with pd.ExcelWriter(buffer, engine='xlsxwriter') as writer:
-            c2_data.to_excel(writer, sheet_name='Sheet1', index=False)
-        download_2 = st.download_button(
-            label="Download 2nd half data as Excel",
-            data=buffer.getvalue(),
-            file_name='clean-data_2nd-half.xlsx',
-            mime='application/vnd.ms-excel',
-            key = 1)
             
     except ValueError:
         st.error("Please upload the timeline file")
