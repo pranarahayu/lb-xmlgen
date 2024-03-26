@@ -90,6 +90,6 @@ def cleandata(datax, tm):
   data['Secs'] = data['Secs'].astype(int)
 
   tempdata = data.reset_index(drop=True)
-  fixdata = resdata(tempdata, datax)
+  fixdata = res_data(tempdata, datax)
 
   return fixdata
