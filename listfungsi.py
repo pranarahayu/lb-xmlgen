@@ -75,10 +75,10 @@ def res_data(data, datax):
 
   return test
 
-def cleandata(datax, tm):
+def cleandata(datax, tm, info):
   data = datax.copy()
   data = data[['Min', 'Num', 'Act Name', 'Team', 'Action']].reset_index()
-  data = data[(data['Action']=='goal') | (data['Action']=='penalty goal') | (data['Action']=='penalty missed') | (data['Action']=='own goal') | (data['Action']=='shoot on target') | (data['Action']=='shoot off target') | (data['Action']=='shoot blocked') | (data['Action']=='key pass') | (data['Action']=='assist')].reset_index(drop=True)
+  data = data[(data['Action']=='save') | (data['Action']=='penalty save') | (data['Action']=='goal') | (data['Action']=='penalty goal') | (data['Action']=='penalty missed') | (data['Action']=='own goal') | (data['Action']=='shoot on target') | (data['Action']=='shoot off target') | (data['Action']=='shoot blocked') | (data['Action']=='key pass') | (data['Action']=='assist')].reset_index(drop=True)
   data['Mins'] = data['Min'].str.split(':').str[0]
   data['Mins_1'] = data['Mins'].str.split('+').str[0]
   data['Mins_1'] = data['Mins_1'].astype(int)
@@ -91,5 +91,16 @@ def cleandata(datax, tm):
 
   tempdata = data.reset_index(drop=True)
   fixdata = res_data(tempdata, datax)
+  fixdata['start'] = fixdata['start']+tm
+  fixdata['end'] = fixdata['end']+tm
+  if (info=='Babak 2'):
+    fixdata['start'] = fixdata['start']-1500
+    fixdata['end'] = fixdata['end']-1500
+  elif (info=='Babak 3):
+    fixdata['start'] = fixdata['start']-3000
+    fixdata['end'] = fixdata['end']-3000
+  elif (info=='Babak 4'):
+    fixdata['start'] = fixdata['start']-4500
+    fixdata['end'] = fixdata['end']-4500
 
   return fixdata
