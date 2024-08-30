@@ -96,7 +96,7 @@ def cleandata(datax, tm, info):
   if (info=='Babak 2'):
     fixdata['start'] = fixdata['start']-1500
     fixdata['end'] = fixdata['end']-1500
-  elif (info=='Babak 3):
+  elif (info=='Babak 3'):
     fixdata['start'] = fixdata['start']-3000
     fixdata['end'] = fixdata['end']-3000
   elif (info=='Babak 4'):
