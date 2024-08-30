@@ -28,10 +28,7 @@ with col1:
     xt = converter(t1)
     try:
         tl = pd.read_excel(tl_data, skiprows=[0])
-        if (fase=='1 (Satu)'):
-            c_data = cleandata(tl, xt, bb)
-        else:
-            c_data = cleandataver2(tl, xt, bb)
+        c_data = cleandata(tl, xt, bb)
         
         buffer = io.BytesIO()
         with pd.ExcelWriter(buffer, engine='xlsxwriter') as writer:
