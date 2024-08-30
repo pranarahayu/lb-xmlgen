@@ -8,9 +8,8 @@ import openpyxl, yattag
 from openpyxl import load_workbook
 from yattag import Doc, indent
 
-st.set_page_config(page_title='Lapangbola XML Generator for Video Tagging', layout='wide')
-st.header('XML File Generator')
-st.markdown('Created by: Prana - R&D Division Lapangbola.com')
+st.set_page_config(page_title='Excel-to-XML Converter for Galados', layout='wide')
+st.markdown('# Excel-to-XML Converter')
 
 sys.path.append("listfungsi.py")
 from listfungsi import res_data
@@ -19,15 +18,20 @@ from listfungsi import converter
 
 with st.expander("CARA PAKAI."):
     st.write("1. Upload file timeline ke file uploader pertama; 2. Download as excel, upload excel ke file uploader kedua; 3. Download file XML")
-    
-col1, col2 = st.columns(2)
+
+bb = st.selectbox('Pilih babak.', ['Babak 1', 'Babak 2', 'Babak 3', 'Babak 4'])
+col1, col2= st.columns(2)
+
 with col1:
     tl_data = st.file_uploader("Upload file timeline excel!")
     t1 = st.text_input('Video dimulai dari?')
     xt = converter(t1)
     try:
         tl = pd.read_excel(tl_data, skiprows=[0])
-        c_data = cleandata(tl, xt)
+        if (fase=='1 (Satu)'):
+            c_data = cleandata(tl, xt, bb)
+        else:
+            c_data = cleandataver2(tl, xt, bb)
         
         buffer = io.BytesIO()
         with pd.ExcelWriter(buffer, engine='xlsxwriter') as writer:
@@ -35,7 +39,7 @@ with col1:
         download = st.download_button(
             label="Download data as Excel",
             data=buffer.getvalue(),
-            file_name='clean-data.xlsx',
+            file_name='clean-data_'+bb+'.xlsx',
             mime='application/vnd.ms-excel',
             key = 0)
             
@@ -91,7 +95,7 @@ with col2:
             download1 = st.download_button(
                 label="Download XML data",
                 data=result,
-                file_name='xml-data.xml',
+                file_name='xml-data_'+bb+'.xml',
                 mime='text/csv')
 
     except ValueError:
