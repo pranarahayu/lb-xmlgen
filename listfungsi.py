@@ -94,19 +94,19 @@ def cleandata(datax, tm, info):
   fixdata['start'] = fixdata['start']+tm
   fixdata['end'] = fixdata['end']+tm
   if (info=='Babak 2'):
-    #fixdata['start'] = fixdata['start']-1500
-    fixdata['start'] = fixdata['start']-2700
-    #fixdata['end'] = fixdata['end']-1500
-    fixdata['end'] = fixdata['end']-2700
+    fixdata['start'] = fixdata['start']-1500
+    #fixdata['start'] = fixdata['start']-2700
+    fixdata['end'] = fixdata['end']-1500
+    #fixdata['end'] = fixdata['end']-2700
   elif (info=='Babak 3'):
-    #fixdata['start'] = fixdata['start']-3000
-    fixdata['start'] = fixdata['start']-5400
-    #fixdata['end'] = fixdata['end']-3000
-    fixdata['end'] = fixdata['end']-5400
+    fixdata['start'] = fixdata['start']-3000
+    #fixdata['start'] = fixdata['start']-5400
+    fixdata['end'] = fixdata['end']-3000
+    #fixdata['end'] = fixdata['end']-5400
   elif (info=='Babak 4'):
-    #fixdata['start'] = fixdata['start']-4500
-    fixdata['start'] = fixdata['start']-6300
-    #fixdata['end'] = fixdata['end']-4500
-    fixdata['end'] = fixdata['end']-6300
+    fixdata['start'] = fixdata['start']-4500
+    #fixdata['start'] = fixdata['start']-6300
+    fixdata['end'] = fixdata['end']-4500
+    #fixdata['end'] = fixdata['end']-6300
 
   return fixdata
