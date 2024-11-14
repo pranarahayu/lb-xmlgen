@@ -78,7 +78,7 @@ def res_data(data, datax):
 def cleandata(datax, tm, info):
   data = datax.copy()
   data = data[['Min', 'Num', 'Act Name', 'Team', 'Action']].reset_index()
-  data = data[(data['Action']=='save') | (data['Action']=='penalty save') | (data['Action']=='goal') | (data['Action']=='penalty goal') | (data['Action']=='penalty missed') | (data['Action']=='own goal') | (data['Action']=='shoot on target') | (data['Action']=='shoot off target') | (data['Action']=='shoot blocked') | (data['Action']=='key pass') | (data['Action']=='assist')].reset_index(drop=True)
+  data = data[(data['Action']=='save') | (data['Action']=='penalty save') | (data['Action']=='goal') | (data['Action']=='penalty goal') | (data['Action']=='penalty missed') | (data['Action']=='own goal') | (data['Action']=='shoot on target') | (data['Action']=='shoot off target') | (data['Action']=='shoot blocked') | (data['Action']=='miss big chance') | (data['Action']=='key pass') | (data['Action']=='assist') | (data['Action']=='cross') | (data['Action']=='cross failed') | (data['Action']=='tackle') | (data['Action']=='intercept')].reset_index(drop=True)
   data['Mins'] = data['Min'].str.split(':').str[0]
   data['Mins_1'] = data['Mins'].str.split('+').str[0]
   data['Mins_1'] = data['Mins_1'].astype(int)
